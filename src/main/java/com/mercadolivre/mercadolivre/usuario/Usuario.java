@@ -1,5 +1,7 @@
 package com.mercadolivre.mercadolivre.usuario;
 
+import org.springframework.util.Assert;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -21,8 +23,17 @@ public class Usuario {
     }
 
     public Usuario(String email, SenhaLimpa senhaLimpa) {
+        Assert.hasLength(email,"Email nao pode ser em branco");
+        Assert.notNull(senhaLimpa,"A senha não pode ser em branco");
+
         this.email = email;
         this.senha = senhaLimpa.hash();
+
+        Assert.isTrue(verificaEntradas(),"Campos não podem ser nulos");
+    }
+
+    public boolean verificaEntradas(){
+        return this.email != null || this.senha != null;
     }
 
     public Long getId() {

@@ -1,14 +1,16 @@
 package com.mercadolivre.mercadolivre.usuario;
+import com.mercadolivre.mercadolivre.validacao.ValidaCampoDuplicado;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 public class UsuarioRequest {
 
     @NotBlank
     @Email
-    //@ValidaCampoDuplicado(atributo = "email", aClass = Usuario.class)
+    @ValidaCampoDuplicado(atributo = "email", aClass = Usuario.class)
     private String email;
     @NotBlank @Size(min = 6)
     private String senha;
@@ -22,6 +24,7 @@ public class UsuarioRequest {
     }
 
     public Usuario toUsuario(){
+
         return new Usuario(this.email, new SenhaLimpa(senha));
     }
 
