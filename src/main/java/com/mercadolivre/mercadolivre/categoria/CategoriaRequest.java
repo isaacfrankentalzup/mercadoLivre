@@ -9,7 +9,7 @@ public class CategoriaRequest {
     @NotBlank
     @ValidaCampoDuplicado(atributo = "nome", aClass = Categoria.class)
     private String nome;
-    @Valid
+
     private Categoria categoriaMae;
 
     public CategoriaRequest(String nome, Categoria categoriaMae) {

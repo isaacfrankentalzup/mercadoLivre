@@ -23,8 +23,8 @@ public class Usuario implements UserDetails {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Perfil> perfis = new ArrayList<>();
+   // @OneToMany(fetch = FetchType.EAGER)
+    //private List<Perfil> perfis = new ArrayList<>();
 
 
 
@@ -65,7 +65,8 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.perfis;
+        //return this.perfis;
+        return null;
     }
 
     @Override
