@@ -13,6 +13,7 @@ public class Caracteristica {
     @ManyToOne
     private Produto produto;
 
+    @Deprecated
     public Caracteristica() {
     }
 

@@ -1,6 +1,8 @@
 package com.mercadolivre.mercadolivre.produto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mercadolivre.mercadolivre.categoria.Categoria;
+import com.mercadolivre.mercadolivre.usuario.Usuario;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -27,10 +29,14 @@ public class Produto {
     private LocalDateTime creatAt = LocalDateTime.now();
 
     @ManyToOne
+    @JsonIgnore
     private Categoria categoria;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private List<Caracteristica> caracteristicas = new ArrayList<>();
+
+    @ManyToOne
+    private Usuario usuario;
 
     @Deprecated //Hibernate
     public Produto() {
@@ -38,7 +44,9 @@ public class Produto {
 
     public Produto(String nome, BigDecimal valor, Integer quantidade,
                    String descricao, Categoria categoria,
-                   List<CaracteristicaRequest> caracteristicas) {
+                   //List<CaracteristicaRequest> caracteristicas)
+                   List<CaracteristicaRequest> caracteristicas,
+                    Usuario usuario) {
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;
@@ -47,6 +55,8 @@ public class Produto {
         this.caracteristicas = caracteristicas.stream()
                 .map(e->new Caracteristica(e.getNome(),e.getDescricao(),this))
                 .collect(Collectors.toList());
+
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -76,6 +86,10 @@ public class Produto {
     public Categoria getCategoria() {
         return categoria;
     }
+
+        public Usuario getUsuario() {
+            return usuario;
+        }
 
 
 }

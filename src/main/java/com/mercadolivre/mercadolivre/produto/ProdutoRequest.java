@@ -1,6 +1,7 @@
 package com.mercadolivre.mercadolivre.produto;
 
 import com.mercadolivre.mercadolivre.categoria.Categoria;
+import com.mercadolivre.mercadolivre.usuario.Usuario;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -25,18 +26,22 @@ public class ProdutoRequest {
     @NotNull
     private Categoria categoria;
 
+    private Usuario usuario;
+
 
     private List<CaracteristicaRequest> caracteristicaRequestList = new ArrayList<>();
 
     public ProdutoRequest(String nome, BigDecimal valor, Integer quantidade, String descricao,
                           Categoria categoria,
-                          List<CaracteristicaRequest> caracteristicaRequestList) {
+                          List<CaracteristicaRequest> caracteristicaRequestList,
+                          Usuario usuario) {
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;
         this.descricao = descricao;
         this.categoria = categoria;
         this.caracteristicaRequestList = caracteristicaRequestList;
+        this.usuario = usuario;
     }
 
     public String getNome() {
@@ -67,10 +72,18 @@ public class ProdutoRequest {
         return caracteristicaRequestList;
     }
 
-    public Produto toProduto (){
-        System.out.println(caracteristicaRequestList);
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+
+    public Produto toProduto (Usuario usuario){
         return new Produto(nome,valor,quantidade,descricao,
-                categoria,caracteristicaRequestList);
+        categoria,caracteristicaRequestList, usuario);
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -82,6 +95,8 @@ public class ProdutoRequest {
                 ", descricao='" + descricao + '\'' +
                 ", creatAt=" + creatAt +
                 ", categoria=" + categoria +
+                ", usuario=" + usuario +
+                ", caracteristicaRequestList=" + caracteristicaRequestList +
                 '}';
     }
 }

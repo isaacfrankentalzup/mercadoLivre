@@ -1,5 +1,7 @@
 package com.mercadolivre.mercadolivre.categoria;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Categoria {
     private String nome;
 
     @ManyToOne
+    @JsonIgnore
     private Categoria categoriaMae;
 
     public Categoria() {
