@@ -17,6 +17,7 @@ public class UsuarioController {
 
     @GetMapping
     public List<Usuario> listarTudo(){
+
         return repository.findAll();
     }
 }
