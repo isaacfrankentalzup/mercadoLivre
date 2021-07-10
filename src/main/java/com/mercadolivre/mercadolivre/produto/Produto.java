@@ -5,6 +5,7 @@ import com.mercadolivre.mercadolivre.categoria.Categoria;
 import com.mercadolivre.mercadolivre.usuario.Usuario;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,8 +14,9 @@ import java.util.stream.Collectors;
 
 @Entity
 public class Produto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    //@ExisteCampo(atributo = "id", aClass = Produto.class, groups = Groups.Produto.class)
     private Long id;
 
     @Column(nullable = false)

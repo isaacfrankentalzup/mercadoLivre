@@ -1,10 +1,12 @@
 package com.mercadolivre.mercadolivre.usuario;
 
+import com.mercadolivre.mercadolivre.validacao.ExisteCampo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +15,8 @@ import java.util.List;
 @Entity
 public class Usuario implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@NotNull(groups = Groups.Usuario.class)
+    @ExisteCampo(atributo = "id",aClass = Usuario.class) //groups = Groups.Usuario.class)
     private Long id;
 
     @Column(nullable = false, unique = true)
