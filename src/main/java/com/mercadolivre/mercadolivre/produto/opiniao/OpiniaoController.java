@@ -15,7 +15,7 @@ public class OpiniaoController {
     }
 
     @PostMapping
-    public Opiniao metodo(@RequestBody @Valid OpiniaoRequest opiniaoRequest){
+    public Opiniao salvarOpiniao(@RequestBody @Valid OpiniaoRequest opiniaoRequest){
         return repository.save(opiniaoRequest.toOpiniao());
     }
 
