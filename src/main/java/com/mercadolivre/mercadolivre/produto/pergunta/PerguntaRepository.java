@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface PerguntaRepository extends JpaRepository<Pergunta, Long> {
 
-   // List<Pergunta> findByProdutoAndId(Long idProduto);
+   List<Pergunta> findByProdutoId(Long idProduto);
 
 }

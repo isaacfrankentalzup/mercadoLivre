@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface OpiniaoRepository extends JpaRepository<Opiniao, Long>{
     List<Opiniao> findByUsuarioId(Long idUsuario);
+    List<Opiniao> findByProdutoId(Long id);
 }
