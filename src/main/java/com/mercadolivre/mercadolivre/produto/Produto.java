@@ -3,9 +3,11 @@ package com.mercadolivre.mercadolivre.produto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mercadolivre.mercadolivre.categoria.Categoria;
 import com.mercadolivre.mercadolivre.usuario.Usuario;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -95,6 +97,17 @@ public class Produto {
 
     public List<Caracteristica> getCaracteristicas() {
         return caracteristicas;
+    }
+
+    public boolean abataEstoque(@Positive int quantidade) {
+        Assert.isTrue(quantidade > 0, "A quantidade de ser maior que zero"
+                + quantidade);
+
+        if (quantidade <= this.quantidade) {
+            this.quantidade -= quantidade;
+            return true;
+        }
+        return false;
     }
 
 
